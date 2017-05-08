@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,51 +8,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <EditText
+            android:id="@+id/editTextUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Username"
-            android:id="@+id/textViewUsername"
-            android:layout_marginTop="57dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="91dp"
-            android:layout_marginStart="91dp" />
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="54dp"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="37dp"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName" />
 
-        <TextView
+        <EditText
+            android:id="@+id/editText8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Password"
-            android:id="@+id/textViewPassword"
-            android:layout_marginTop="64dp"
-            android:layout_below="@+id/textViewUsername"
-            android:layout_alignLeft="@+id/textViewUsername"
-            android:layout_alignStart="@+id/textViewUsername" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forgot Password?"
-            android:id="@+id/buttonForgotPassword"
-            android:layout_below="@+id/textViewPassword"
-            android:layout_alignLeft="@+id/textViewPassword"
-            android:layout_alignStart="@+id/textViewPassword"
-            android:layout_marginTop="28dp" />
+            android:layout_alignEnd="@+id/editTextUsername"
+            android:layout_alignRight="@+id/editTextUsername"
+            android:layout_below="@+id/editTextUsername"
+            android:layout_marginTop="70dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
             android:id="@+id/buttonLogin"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/buttonForgotPassword"
-            android:layout_alignStart="@+id/buttonForgotPassword"
-            android:layout_marginBottom="111dp"
-            android:layout_alignRight="@+id/buttonForgotPassword"
-            android:layout_alignEnd="@+id/buttonForgotPassword" />
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/editText8"
+            android:layout_alignRight="@+id/editText8"
+            android:layout_below="@+id/editText8"
+            android:layout_marginTop="75dp"
+            android:text="Login" />
     </RelativeLayout>
 </LinearLayout>

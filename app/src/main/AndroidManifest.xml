@@ -15,8 +15,79 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".create_new_account"></activity>
-        <activity android:name=".login"></activity>
+
+        <activity
+            android:name=".create_new_account"
+            android:parentActivityName="com.example.michael.smarthealth.MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.example.michael.smarthealth.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".login"
+            android:parentActivityName="com.example.michael.smarthealth.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.michael.smarthealth.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".main_screen"
+            android:parentActivityName="com.example.michael.smarthealth.login">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.michael.smarthealth.login" />
+        </activity>
+
+        <activity
+            android:name=".settings"
+            android:parentActivityName=".main_screen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.michael.smarthealth.main_screen" />
+        </activity>
+
+        <activity
+            android:name=".progress"
+            android:parentActivityName=".main_screen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.michael.smarthealth.main_screen" />
+        </activity>
+
+        <activity
+            android:name=".exercise_startup"
+            android:parentActivityName=".main_screen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.michael.smarthealth.main_screen" />
+        </activity>
+
+        <activity
+            android:name=".gamification_spinner_decide"
+            android:parentActivityName=".exercise_startup">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.michael.smarthealth.exercise_startup" />
+        </activity>
+
+        <activity
+            android:name=".exercise_continue"
+            android:parentActivityName=".exercise_startup">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.michael.smarthealth.exercise_startup" />
+        </activity>
+
+        <activity
+            android:name=".exercise_rewards"
+            android:parentActivityName=".exercise_continue">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.michael.smarthealth.exercise_continue"/>
+        </activity>
+
     </application>
 
 </manifest>

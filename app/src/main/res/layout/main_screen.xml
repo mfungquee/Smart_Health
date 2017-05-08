@@ -11,10 +11,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Exercise"
-            android:id="@+id/button"
+            android:id="@+id/buttonExercise"
             android:layout_marginLeft="53dp"
             android:layout_marginStart="53dp"
-            android:layout_above="@+id/button3"
+            android:layout_above="@+id/buttonFriends"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="74dp" />
@@ -23,10 +23,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Settings"
-            android:id="@+id/button2"
+            android:id="@+id/buttonSettings"
             android:layout_marginRight="41dp"
             android:layout_marginEnd="41dp"
-            android:layout_alignTop="@+id/button"
+            android:layout_alignTop="@+id/buttonExercise"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -34,20 +34,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Friends"
-            android:id="@+id/button3"
+            android:id="@+id/buttonFriends"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/button"
-            android:layout_alignStart="@+id/button"
+            android:layout_alignLeft="@+id/buttonExercise"
+            android:layout_alignStart="@+id/buttonExercise"
             android:layout_marginBottom="140dp" />
 
         <Button
+            android:id="@+id/buttonProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Progress"
-            android:id="@+id/button4"
-            android:layout_alignBottom="@+id/button3"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_alignStart="@+id/button2" />
+            android:layout_alignBottom="@+id/buttonFriends"
+            android:layout_alignLeft="@+id/buttonSettings"
+            android:layout_alignStart="@+id/buttonSettings"
+            android:text="Progress" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,8 +55,8 @@
             android:text="Welcome Firstname!"
             android:id="@+id/textView"
             android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/button"
-            android:layout_alignStart="@+id/button"
+            android:layout_alignLeft="@+id/buttonExercise"
+            android:layout_alignStart="@+id/buttonExercise"
             android:layout_marginTop="36dp" />
 
         <TextView

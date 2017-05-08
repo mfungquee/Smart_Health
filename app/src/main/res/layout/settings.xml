@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Settings"
-        android:id="@+id/button8"
+        android:id="@+id/buttonEditSettings"
         android:layout_marginRight="38dp"
         android:layout_marginEnd="38dp"
         android:layout_above="@+id/textView12"
@@ -73,15 +73,15 @@
         android:layout_marginBottom="27dp" />
 
     <Button
+        android:id="@+id/buttonConfirm"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:id="@+id/button9"
+        android:layout_alignEnd="@+id/buttonEditSettings"
+        android:layout_alignRight="@+id/buttonEditSettings"
         android:layout_below="@+id/textView16"
-        android:layout_alignRight="@+id/button8"
-        android:layout_alignEnd="@+id/button8"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:text="Confirm" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Settings"
         android:id="@+id/textView17"
-        android:layout_alignTop="@+id/button8"
+        android:layout_alignTop="@+id/buttonEditSettings"
         android:layout_alignLeft="@+id/textView12"
         android:layout_alignStart="@+id/textView12" />
 
