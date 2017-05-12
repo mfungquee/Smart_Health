@@ -64,7 +64,7 @@ public class DBHandler{
 	}
 //end of makeUserAccount
 
-//retrieve user information
+//retrieve user information based on username
 	public void retrieveInfo(String u){
 		for (Userinfo user : userinfoDAO) {
 			String currentID = user.getUsername();
