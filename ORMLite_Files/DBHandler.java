@@ -3,7 +3,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 
-//STRING TO INTERGER -> int foo = Integer.parseInt("1234");
+//STRING TO INTEGER -> int foo = Integer.parseInt("1234");
 
 
 public class DBHandler{
