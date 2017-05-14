@@ -16,8 +16,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "smarthealth.db";
     //tables used
-    public static final String TABLE_DM= "Decision_Matrix_Table";
     public static final String TABLE_G = "Gamification_Table";
+    public static final String TABLE_DM= "Decision_Matrix_Table";
+
 
     //column names
     public static final String KEY_ID = "id";
@@ -42,10 +43,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CURRENTREPS = "currentReps"; //INT
 
     //Table Creation statements (sqlite statements to be executed with java functions)
-    public static final String Create_Table_DM= "CREATE TABLE " + TABLE_DM + "(" + KEY_ID + "INTEGER PRIMARY KEY,"
+    public static final String Create_Table_G= "CREATE TABLE " + TABLE_G + "(" + KEY_ID + "INTEGER PRIMARY KEY,"
             + LEVEL + " INTEGER," + CURRENTEXP + " INTEGER," + MAXEXP + " INTEGER" + ")";
 
-    public static final String Create_Table_G = "CREATE TABLE " + TABLE_G + "(" + KEY_ID + "INTEGER PRIMARY KEY,"
+    public static final String Create_Table_DM = "CREATE TABLE " + TABLE_DM + "(" + KEY_ID + "INTEGER PRIMARY KEY,"
             + USERID + " INTEGER," + TOTALSR + " DOUBLE," + NUMTIMES + " INTEGER," + AVGSR + " DOUBLE,"
             + WEEKSR + " DOUBLE,"  + WEEKNUMSUCCESS + " INTEGER,"  + SCORES + " DOUBLE," + SUM + " DOUBLE,"
             + WEIGHTS + " DOUBLE,"  + CURRENTSR + " DOUBLE,"  + PREVIOUSREPS + " INTEGER,"  + CURRENTREPS + " INTEGER," + ")";
