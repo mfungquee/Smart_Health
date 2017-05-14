@@ -29,9 +29,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_ID = "id";
 
     //gamification specific columns
-    public static final String LEVEL = "level";
-    public static final String CURRENTEXP = "currentexp";
-    public static final String MAXEXP = "maxexp";
+    public static final String LEVEL = "level"; //int
+    public static final String CURRENTEXP = "currentexp"; //int
+    public static final String MAXEXP = "maxexp"; //int
 
     //decision matrix specific columns
     public static final String USERID = "user"; //INT
@@ -92,13 +92,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }*/
 
-    public Cursor getAllData() {
+    public Cursor getAllDataDM() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_DM,null);
+        Cursor res = db.rawQuery("select * from "+TABLE_DM, null);
         return res;
     }
 
-    public boolean updateData(String id, double totalSR, int numTimes, double avgSR,
+    public boolean updateDataDM(String id, double totalSR, int numTimes, double avgSR,
                               double weekSR, double scores, double sum, double weights,
                               double currentSR, int previousReps, int currentReps) {
 
@@ -117,10 +117,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PREVIOUSREPS,previousReps);
         contentValues.put(CURRENTREPS,currentReps);
         //update database with values stored in contentValues
+        //update arguments -> Database, Contentvalues, where clause, where arguments
         db.update(TABLE_DM, contentValues, "ID = ?",new String[] { id });
         return true;
     }
 
+    public Cursor getAllDataG(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_G, null);
+        return res;
+    }
+
+    public boolean updateDataG(String id, int level, int currentExp, int maxExp){
+
+        //open db with ability to save
+        SQLiteDatabase db = this.getWritableDatabase();
+        //store variables into contentvalues
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(LEVEL,level);
+        contentValues.put(CURRENTEXP,currentExp);
+        contentValues.put(MAXEXP,maxExp);
+        //update database with values stored in content values
+        db.update(TABLE_G, contentValues, "ID = ?", new String[] { id });
+        return true;
+
+    }
+
+    
     /*
     public Integer deleteData (String id) {
         SQLiteDatabase db = this.getWritableDatabase();
