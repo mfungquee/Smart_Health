@@ -23,7 +23,7 @@ public class exercise_startup extends AppCompatActivity {
     //this needs to have been created at the start of the app
     DecisionMatrix dm = new DecisionMatrix();
     Gamification gm = new Gamification();
-    int method = 0;     //this has to persist until exercise_rewards
+    int method = 1;     //this has to persist until exercise_rewards
     /************ END TESTING VARIABLES ***********/
 
     public void functionsUI(){

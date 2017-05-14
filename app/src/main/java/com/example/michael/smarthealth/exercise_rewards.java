@@ -20,7 +20,7 @@ public class exercise_rewards extends AppCompatActivity {
 
     /************ TESTING VARIABLES ***********/
     // these variables are created before this activity: has to persist throughout app
-    int method = 0;     //this will have been determined by exercise_startup.
+    int method = 1;     //this will have been determined by exercise_startup.
     Gamification gm = new Gamification();
     DecisionMatrix dm = new DecisionMatrix(); //one for each exercise
     /************ END TESTING VARIABLES ***********/
@@ -40,11 +40,11 @@ public class exercise_rewards extends AppCompatActivity {
 
         //rewards textview and badge imageview will be determined by method
         switch (method) {
-            case 0:
+            case 1:
                 int exp = (int)exerciseGrade;
                 rewards.setText(gm.getExpReward(exp));
                 break;
-            case 1:
+            case 2:
                 if (exerciseGrade >= 200){
                     rewards.setText("You got badge1!");
                     badge.setImageResource(gm.getBadgeReward(1));

@@ -33,7 +33,7 @@ public class exercise_continue extends AppCompatActivity {
 
     DecisionMatrix dm = new DecisionMatrix();
     int sumReps;
-    int method = 0; //this has to be brought in from exercise_startup.
+    int method = 1; //this has to be brought in from exercise_startup.
 
     public void functionsUI(){
 
@@ -107,14 +107,16 @@ public class exercise_continue extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: send workout information into database
+
                 sumReps += Integer.parseInt((editTextNumberOfReps.getText().toString()));
+
                 if(viewFlipper.getDisplayedChild() != 0) {
                     viewFlipper.setInAnimation(getApplicationContext(), R.anim.slide_in_from_right);
                     viewFlipper.setOutAnimation(getApplicationContext(), R.anim.slide_out_to_left);
                     viewFlipper.setDisplayedChild(0); //0 = original page
                 }
             }
-        }); //end line of buttonDone
+        }); //end line of buttonConfirm
 
 
         buttonDone = (Button)findViewById(R.id.buttonDone); //reference by xml id
@@ -122,7 +124,9 @@ public class exercise_continue extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: send workout information into database
+
                 dm.update(method, sumReps);
+
                 Intent intent = new Intent(v.getContext(), exercise_rewards.class); //intent is the link between pages
                 startActivity(intent); //when button is pressed, move from activity1 to activity2
                 finish(); // take off stack so user can't return with back
