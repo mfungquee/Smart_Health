@@ -37,7 +37,6 @@ import java.util.Arrays;
 public class DecisionMatrix {
 
     private int userID; // user ID
-    private int exerciseID; // exercise ID
 
     private double[] totalSR; // Running total of success rates
     private int[] numTimes; // count of how many of each was done;
@@ -53,9 +52,8 @@ public class DecisionMatrix {
     private int gameId;
     private double currentSR;       //
 
-    public DecisionMatrix(int user, int exercise) {
+    public DecisionMatrix(int user) {
         userID = user;
-        exerciseID = exercise;
         totalSR = new double[5];
         numTimes = new int[5];
         avgSR = new double[5];
@@ -213,14 +211,6 @@ public class DecisionMatrix {
         this.userID = userID;
     }
 
-    public int getExerciseID() {
-        return exerciseID;
-    }
-
-    public void setExerciseID(int exerciseID) {
-        this.exerciseID = exerciseID;
-    }
-
     public double[] getTotalSR() {
         return totalSR;
     }
@@ -294,7 +284,6 @@ public class DecisionMatrix {
         }
         return "DecisionMatrix \n"
                 + "userID=" + userID + "\n"
-                + "exerciseID=" + exerciseID + "\n"
                 + "totalSR=" + Arrays.toString(totalSR) + "\n"
                 + "numTimes=" + Arrays.toString(numTimes) + "\n"
                 + "avgSR=" + Arrays.toString(avgSR) + "\n"

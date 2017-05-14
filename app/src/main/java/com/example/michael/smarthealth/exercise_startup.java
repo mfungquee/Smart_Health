@@ -17,10 +17,21 @@ public class exercise_startup extends AppCompatActivity {
     EditText editTextFeel;
     Button buttonContinue;
     Button buttonHelpMeDecide;
+    TextView gamification_text;
+
+    /************ TESTING VARIABLES ***********/
+    //this needs to have been created at the start of the app
+    DecisionMatrix dm = new DecisionMatrix(1);
+    Gamification gm = new Gamification();
+    /************ END TESTING VARIABLES ***********/
 
     public void functionsUI(){
 
         editTextFeel = (EditText)findViewById(R.id.editTextFeel);
+        gamification_text = (TextView)findViewById(R.id.gamification_text);
+        int method = dm.chooseMethod();
+        gamification_text.setText(gm.getString(method));
+
 
         buttonContinue = (Button)findViewById(R.id.buttonContinue);
         buttonContinue.setOnClickListener(new View.OnClickListener() {

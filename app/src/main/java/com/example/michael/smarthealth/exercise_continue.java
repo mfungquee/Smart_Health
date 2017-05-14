@@ -23,7 +23,6 @@ public class exercise_continue extends AppCompatActivity {
     EditText editTextNumberOfReps;
     TextView textViewDescription;
     ImageView imageViewExercise;
-    TextView gamificationText;
     ViewFlipper viewFlipper;
     //adapters
     ListAdapter listViewWorkoutAdapter;
@@ -31,16 +30,6 @@ public class exercise_continue extends AppCompatActivity {
     //images from the drawable folder
     public Integer images[] = {R.drawable.pullup, R.drawable.pushup, R.drawable.situp, R.drawable.squat};
     public int exerciseImage = 0;
-    public int[] methods = new int[5];
-
-
-    /************ TESTING VARIABLES ***********/
-    // these variables are created before this activity: has to persist throughout app
-    Gamification gamification = new Gamification();
-    int numExercises = 4;
-    DecisionMatrix[] exercises = new DecisionMatrix[numExercises+1]; //one for each exercise
-
-    /************ END TESTING VARIABLES ***********/
 
 
     public void functionsUI(){
@@ -52,7 +41,6 @@ public class exercise_continue extends AppCompatActivity {
         listViewWorkout = (ListView)findViewById(R.id.listViewWorkout); //workout list on original page
         textViewDescription = (TextView)findViewById(R.id.textViewDescription); //description on flipped page
         imageViewExercise = (ImageView)findViewById(R.id.imageViewExercise); //image on flipped page
-        gamificationText = (TextView)findViewById(R.id.gamificationText);   //gamification text on flipped page
 
         //make an adapter for listView to click on individual items
         //populateList() provides a list of items to populate the listViewWorkout
@@ -79,29 +67,21 @@ public class exercise_continue extends AppCompatActivity {
                 if(foundExerciseName == true){
                     textViewDescription.setText(myExercise.getInstruction(1));
                     imageViewExercise.setImageResource(R.drawable.pushup);
-                    //this will use the gamification object to set method
-                    gamificationText.setText(gamification.getString(methods[1]));
                 }
 
                 if(foundExerciseName = thisExercise.contains("Situps")){
                     textViewDescription.setText(myExercise.getInstruction(2));
                     imageViewExercise.setImageResource(R.drawable.situp);
-                    //this will use the gamification object to set method
-                    gamificationText.setText(gamification.getString(methods[2]));
                 }
 
                 if(foundExerciseName = thisExercise.contains("Squats")){
                     textViewDescription.setText(myExercise.getInstruction(4));
                     imageViewExercise.setImageResource(R.drawable.squat);
-                    //this will use the gamification object to set method
-                    gamificationText.setText(gamification.getString(methods[4]));
                 }
 
                 if(foundExerciseName = thisExercise.contains("Pullups")){
                     textViewDescription.setText(myExercise.getInstruction(3));
                     imageViewExercise.setImageResource(R.drawable.pullup);
-                    //this will use the gamification object to set method
-                    gamificationText.setText(gamification.getString(methods[3]));
                 }
 
 
@@ -160,16 +140,5 @@ public class exercise_continue extends AppCompatActivity {
         setContentView(R.layout.exercise_continue);
         functionsUI();
 
-        /**** FOR TESTING*****/
-        //this should be created at the beginning of app
-        for (int i = 1; i<5; i++){
-            exercises[i] = new DecisionMatrix(1, i);
-        }
-        /**** END TESTING ****/
-
-        //this chooses random game methods for each exercise
-        for (int i=1; i<5; i++) {
-            methods[i] = exercises[i].chooseMethod();
-        }
     }//end onCreate
 }
