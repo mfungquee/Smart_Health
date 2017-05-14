@@ -33,12 +33,25 @@
             android:hint="On a scale from 1 to 10..."
             android:inputType="number" />
 
+        <TextView
+            android:id="@+id/gamification_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gamification method"
+            android:layout_alignLeft="@+id/editTextFeel"
+            android:layout_alignStart="@+id/editTextFeel"
+            android:layout_below="@+id/editTextFeel"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="65dp"
+            android:ems="10" />
+
         <Button
             android:id="@+id/buttonContinue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Continue"
-            android:layout_centerVertical="true"
+            android:layout_above="@+id/buttonHelpMeDecide"
             android:layout_alignRight="@+id/textView6"
             android:layout_alignEnd="@+id/textView6" />
 
