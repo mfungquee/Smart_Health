@@ -21,15 +21,16 @@ public class exercise_startup extends AppCompatActivity {
 
     /************ TESTING VARIABLES ***********/
     //this needs to have been created at the start of the app
-    DecisionMatrix dm = new DecisionMatrix(1);
+    DecisionMatrix dm = new DecisionMatrix();
     Gamification gm = new Gamification();
+    int method = 0;     //this has to persist until exercise_rewards
     /************ END TESTING VARIABLES ***********/
 
     public void functionsUI(){
 
         editTextFeel = (EditText)findViewById(R.id.editTextFeel);
         gamification_text = (TextView)findViewById(R.id.gamification_text);
-        int method = dm.chooseMethod();
+        method = dm.chooseMethod();
         gamification_text.setText(gm.getString(method));
 
 

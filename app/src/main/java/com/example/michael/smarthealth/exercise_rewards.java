@@ -22,7 +22,7 @@ public class exercise_rewards extends AppCompatActivity {
     // these variables are created before this activity: has to persist throughout app
     int method = 0;     //this will have been determined by exercise_startup.
     Gamification gm = new Gamification();
-    DecisionMatrix dm = new DecisionMatrix(1); //one for each exercise
+    DecisionMatrix dm = new DecisionMatrix(); //one for each exercise
     /************ END TESTING VARIABLES ***********/
 
 
