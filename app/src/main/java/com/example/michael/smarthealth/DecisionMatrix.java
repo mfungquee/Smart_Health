@@ -49,11 +49,12 @@ public class DecisionMatrix {
     private double sum; // Sum of Totals
     private double[] weights; // Weights
 
-    private int gameId;
+    private int previousReps;
+    private int currentReps;
     private double currentSR;       //
 
-    public DecisionMatrix(int user) {
-        userID = user;
+    public DecisionMatrix() {
+        userID = 1;         //get this from db.
         totalSR = new double[5];
         numTimes = new int[5];
         avgSR = new double[5];
@@ -79,6 +80,8 @@ public class DecisionMatrix {
         calcWeights();
 
         currentSR = 0;
+        previousReps = 1;
+        currentReps = 1;
     }
 
     /********************************************
@@ -161,15 +164,16 @@ public class DecisionMatrix {
     /********************************************
      *********FOR TESTING PURPOSES**********
      ********************************************/
-    public void update(int gameID, double successRate) {
-        gameId = gameID;
-        currentSR = successRate;
+    public void update(int gameID, int reps) {
+        previousReps = currentReps;
+        currentReps = reps;
+        currentSR = (currentReps - previousReps)/previousReps;
         //take off oldest success rate and add newest success rate
         for (int i=0; i<6; i++)
         {
             weekSR[gameID-1][i] = weekSR[gameID-1][i+1];
         }
-        weekSR[gameID-1][6] = successRate;
+        weekSR[gameID-1][6] = currentSR;
 
         //count # of successes past week and put into weekNumSuccess
         weekNumSuccess[gameID-1] = 0;
@@ -182,7 +186,7 @@ public class DecisionMatrix {
         }
 
         //update avg success rate
-        totalSR[gameID-1] += successRate;		//add to success rate running total
+        totalSR[gameID-1] += currentSR;		//add to success rate running total
         numTimes[gameID-1]++; 					//increment # of times game method used
         avgSR[gameID-1] = totalSR[gameID-1] / numTimes[gameID-1]; 		//total success / num times used
 
@@ -270,6 +274,14 @@ public class DecisionMatrix {
     public double[] getWeights() { return weights; }
 
     public void setWeights(double[] weights) { this.weights = weights; }
+
+    public double getPreviousReps() { return previousReps; }
+
+    public void setPreviousReps(int reps) { this.previousReps = reps; }
+
+    public double getCurrentReps() { return currentReps; }
+
+    public void setCurrentReps(int reps) { this.currentReps = reps; }
 
     public double getCurrentSR() { return currentSR; }
 
