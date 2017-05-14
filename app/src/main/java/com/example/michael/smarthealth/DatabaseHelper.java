@@ -10,10 +10,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static android.R.attr.id;
+
 /**
  * Created by ProgrammingKnowledge on 4/3/2015.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
+
+    DecisionMatrix myDM = new DecisionMatrix();
+    //database name
     public static final String DATABASE_NAME = "smarthealth.db";
     //tables used
     public static final String TABLE_G = "Gamification_Table";
@@ -85,27 +90,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         else
             return true;
-    }
+    }*/
 
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_NAME,null);
+        Cursor res = db.rawQuery("select * from "+TABLE_DM,null);
         return res;
     }
 
-    public boolean updateData(String id,String name,String surname,String marks) {
+    public boolean updateData(String id, double totalSR, int numTimes, double avgSR,
+                              double weekSR, double scores, double sum, double weights,
+                              double currentSR, int previousReps, int currentReps) {
+
+        //open db with ability to save
         SQLiteDatabase db = this.getWritableDatabase();
+        //store variables into contentvalues
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1,id);
-        contentValues.put(COL_2,name);
-        contentValues.put(COL_3,surname);
-        contentValues.put(COL_4,marks);
-        db.update(TABLE_NAME, contentValues, "ID = ?",new String[] { id });
+        contentValues.put(TOTALSR,totalSR);
+        contentValues.put(NUMTIMES,numTimes);
+        contentValues.put(AVGSR,avgSR);
+        contentValues.put(WEEKSR,weekSR);
+        contentValues.put(SCORES,scores);
+        contentValues.put(SUM,sum);
+        contentValues.put(WEIGHTS,weights);
+        contentValues.put(CURRENTSR,currentSR);
+        contentValues.put(PREVIOUSREPS,previousReps);
+        contentValues.put(CURRENTREPS,currentReps);
+        //update database with values stored in contentValues
+        db.update(TABLE_DM, contentValues, "ID = ?",new String[] { id });
         return true;
     }
 
+    /*
     public Integer deleteData (String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "ID = ?",new String[] {id});
-    } */
+    }*/
 }
