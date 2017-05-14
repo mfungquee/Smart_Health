@@ -52,5 +52,17 @@
             android:layout_marginBottom="80dp"
             android:text="Help Me Decide!" />
 
+        <TextView
+            android:id="@+id/gamification_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/editTextFeel"
+            android:layout_alignLeft="@+id/editTextFeel"
+            android:layout_alignRight="@+id/editTextFeel"
+            android:layout_alignStart="@+id/editTextFeel"
+            android:layout_below="@+id/editTextFeel"
+            android:layout_marginTop="61dp"
+            android:text="TextView" />
+
     </RelativeLayout>
 </LinearLayout>
