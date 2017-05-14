@@ -1,14 +1,5 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -17,6 +8,7 @@ import com.j256.ormlite.misc.TransactionManager;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -34,28 +26,18 @@ public class DBHandler{
 	//private Dao<exerciseinfo, Integer> exerciseinfoDAO;
 	//private Dao<gamification, Integer> gamificationDAO;
 	private Dao<progress, Integer> progressDAO;
-
-	public static void main(String[] args) throws Exception{
-		new DBHandler().doMain(args);
-	}
 	
 //Constructor
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-	public void doMain(String[] args) throws Exception{
+	public DBHandler() throws Exception{
 		ConnectionSource connectionSource = null;
 		
 		try{
 			connectionSource = new JdbcConnectionSource(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD); //create data-source for the database
-			setupDatabase(connectionSource); //setup database and DAOs
-			
-			
-			
-			//Put any code to test functions in this section:
-			retrieveInfo();
-			// construct a query using the QueryBuilder
-
-			//makeUserAccount("abc123", "hellohello");
-			//
+			userinfoDAO = DaoManager.createDao(connectionSource, Userinfo.class);
+			//exerciseinfoDAO = DaoManager.createDao(connectionSource, exerciseinfo.class);
+			//gamificationDAO = DaoManager.createDao(connectionSource, gamification.class);
+			progressDAO = DaoManager.createDao(connectionSource, progress.class);
 		   } finally{
 			   
 			//destroy data source which closed any other connections
@@ -63,14 +45,6 @@ public class DBHandler{
 				connectionSource.close();
 			}
 		}
-	}
-	
-	//Set up database & DAO
-	public void setupDatabase(ConnectionSource connectionSource) throws Exception{
-		userinfoDAO = DaoManager.createDao(connectionSource, Userinfo.class);
-		//exerciseinfoDAO = DaoManager.createDao(connectionSource, exerciseinfo.class);
-		//gamificationDAO = DaoManager.createDao(connectionSource, gamification.class);
-		progressDAO = DaoManager.createDao(connectionSource, progress.class);
 	}
 //----------------------------------------------------------------------------------------------------------------------------------------------------	
 
@@ -87,17 +61,25 @@ public class DBHandler{
 		
 		//updates database with new user
 		userinfoDAO.update(user); 
+		
+		System.out.print("New Account created.");
 	}
 //end of makeUserAccount
 
-//retrieve all user information
-	public void retrieveInfo(){
-		for (Userinfo user : userinfoDAO){
-			System.out.println(user.getID());
-			System.out.println(user.getUsername());
-			System.out.println(user.getPassword());
-	    }
+//retrieve user information
+/*
+	public void retrieveInfo() throws SQLException{
+		// get our query builder from the DAO
+		QueryBuilder<Userinfo, Integer> queryBuilder =
+		  userinfoDAO.queryBuilder();
+		// get the WHERE object to build our query
+		Where<Userinfo, Integer> where = queryBuilder.where();
+		// the name field must be equal to "foo"
+		where.eq(Userinfo.USERNAME_FIELD_NAME, "asaxena");
+		PreparedQuery<Userinfo> preparedQuery = queryBuilder.prepare();
+
 	}
+*/
 //	
 //create new entry in the progress table	
 	public void progressEntry(int iduserinfo_, String date_, int idexerciseinfo_, int idgamification_, int reps_, int successrate_) throws Exception{
