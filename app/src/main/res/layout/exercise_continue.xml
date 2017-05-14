@@ -3,49 +3,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical">
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textViewExercise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Excercise"
+                    android:textSize="30sp" />
+                <ListView
+                    android:id="@+id/listViewWorkout"
+                    android:layout_width="match_parent"
+                    android:layout_height="474dp" />
+                <Button
+                    android:id="@+id/buttonDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Done" />
+            </LinearLayout>
+        </ScrollView>
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageViewExercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <TextView
-                android:id="@+id/textViewExercise"
+                android:id="@+id/textViewDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Excercise"
-                android:textSize="30sp" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ListView
-                        android:id="@+id/listViewWorkout"
-                        android:layout_width="match_parent"
-                        android:layout_height="474dp" />
-
-                    <Button
-                        android:id="@+id/buttonDone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Done" />
-
-                </LinearLayout>
-            </ScrollView>
-
+                android:text="TextView" />
+            <EditText
+                android:id="@+id/editTextNumberOfReps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Enter completed number of reps"/>
+            <Button
+                android:id="@+id/buttonConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm" />
         </LinearLayout>
-    </RelativeLayout>
+
+    </ViewFlipper>
+
 </LinearLayout>
