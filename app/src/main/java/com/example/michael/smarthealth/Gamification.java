@@ -33,10 +33,10 @@ public class Gamification {
             badges[i] = 0;
         }
 
-        badgeImages[0] = R.drawable.redBadge;
-        badgeImages[1] = R.drawable.greenBadge;
-        badgeImages[2] = R.drawable.purpleBadge;
-        badgeImages[3] = R.drawable.yellowBadge;
+        badgeImages[0] = R.drawable.redbadge;
+        badgeImages[1] = R.drawable.greenbadge;
+        badgeImages[2] = R.drawable.purplebadge;
+        badgeImages[3] = R.drawable.yellowbadge;
 
         //facts
         facts = new String[5];
