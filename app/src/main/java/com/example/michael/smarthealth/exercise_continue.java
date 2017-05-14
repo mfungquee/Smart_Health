@@ -23,6 +23,7 @@ public class exercise_continue extends AppCompatActivity {
     EditText editTextNumberOfReps;
     TextView textViewDescription;
     ImageView imageViewExercise;
+    TextView gamificationText;
     ViewFlipper viewFlipper;
     //adapters
     ListAdapter listViewWorkoutAdapter;
@@ -41,6 +42,7 @@ public class exercise_continue extends AppCompatActivity {
         listViewWorkout = (ListView)findViewById(R.id.listViewWorkout); //workout list on original page
         textViewDescription = (TextView)findViewById(R.id.textViewDescription); //description on flipped page
         imageViewExercise = (ImageView)findViewById(R.id.imageViewExercise); //image on flipped page
+        gamificationText = (TextView)findViewById(R.id.gamificationText);   //gamification text on flipped page
         //make an adapter for listView to click on individual items
         //populateList() provides a list of items to populate the listViewWorkout
         listViewWorkoutAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, populateList());
@@ -66,21 +68,45 @@ public class exercise_continue extends AppCompatActivity {
                 if(foundExerciseName == true){
                     textViewDescription.setText(myExercise.getInstruction(1));
                     imageViewExercise.setImageResource(R.drawable.pushup);
+                    /*
+                    //this will be the decision matrix for pushup
+                    int method = pushup.chooseMethod();
+                    //this will use the gamification object
+                    gamificationText.setText(gamification.getString(method);
+                    */
                 }
 
                 if(foundExerciseName = thisExercise.contains("Situps")){
                     textViewDescription.setText(myExercise.getInstruction(2));
                     imageViewExercise.setImageResource(R.drawable.situp);
+                    /*
+                    //this will be the decision matrix for situp
+                    int method = situp.chooseMethod();
+                    //this will use the gamification object
+                    gamificationText.setText(gamification.getString(method);
+                    */
                 }
 
                 if(foundExerciseName = thisExercise.contains("Squats")){
                     textViewDescription.setText(myExercise.getInstruction(4));
                     imageViewExercise.setImageResource(R.drawable.squat);
+                    /*
+                    //this will be the decision matrix for squat
+                    int method = squat.chooseMethod();
+                    //this will use the gamification object
+                    gamificationText.setText(gamification.getString(method);
+                    */
                 }
 
                 if(foundExerciseName = thisExercise.contains("Pullups")){
                     textViewDescription.setText(myExercise.getInstruction(3));
                     imageViewExercise.setImageResource(R.drawable.pullup);
+                    /*
+                    //this will be the decision matrix for pullup
+                    int method = pullup.chooseMethod();
+                    //this will use the gamification object
+                    gamificationText.setText(gamification.getString(method);
+                    */
                 }
 
 

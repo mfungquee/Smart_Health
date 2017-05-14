@@ -4,6 +4,8 @@ package com.example.michael.smarthealth;
  * Created by Robin on 5/13/2017.
  */
 
+import java.util.Random;
+
 /**
  * Gamification IDs
  * 1. Level
@@ -12,6 +14,7 @@ package com.example.michael.smarthealth;
  * 4. Friend
  * 5. Competition
  */
+
 public class Gamification {
     //currently have:
     private float level;
@@ -64,14 +67,35 @@ public class Gamification {
         return award;
     }
 
-    public String getFact() {
-
-
-
-
-        return "ha";
+    private String getFact() {
+        Random rn = new Random();
+        int x = rn.nextInt(4);
+        return facts[x];
     }
 
+    //converts number to string (gamification method)
+    public String getString(int x) {
+        int num = x-1;
+        String method = "";
+        switch (x) {
+            case 0:
+                method = "you will gain levels";
+                break;
+            case 1:
+                method = "you will gain a badge";
+                break;
+            case 2:
+                method = getFact();
+                break;
+            case 3:
+                method = "friends";
+                break;
+            case 4:
+                method = "competition";
+                break;
+        }
+        return method;
+    }
 
     //Getters & Setters
 
