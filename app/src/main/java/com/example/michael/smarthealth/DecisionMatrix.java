@@ -50,6 +50,9 @@ public class DecisionMatrix {
     private double sum; // Sum of Totals
     private double[] weights; // Weights
 
+    private int gameId;
+    private double currentSR;       //
+
     public DecisionMatrix(int user, int exercise) {
         userID = user;
         exerciseID = exercise;
@@ -76,6 +79,8 @@ public class DecisionMatrix {
 
         // default weights
         calcWeights();
+
+        currentSR = 0;
     }
 
     /********************************************
@@ -102,10 +107,10 @@ public class DecisionMatrix {
         // choose a random number and see which method gets chosen depending on
         // weights
         double num = Math.random(); // random # between 0 and 1
-        double limit = 0; // first limit is up to levelsWeight
+        double limit = weights[0]; // first limit is up to levelsWeight
         int i = 0; // weights array index
 
-        while (num > limit) // this only works if the db starts at index 1,
+        while (num > limit)
         // instead of 0
         {
             limit += weights[i];
@@ -115,7 +120,7 @@ public class DecisionMatrix {
         return i;
     }
 
-	/*
+	/*  this is to be called after a new entry has been added to db progress table
 	public void update() {
 
 		***********NEED DB STUFF HERE************
@@ -154,6 +159,44 @@ public class DecisionMatrix {
 	}
 	 */
 
+
+    /********************************************
+     *********FOR TESTING PURPOSES**********
+     ********************************************/
+    public void update(int gameID, double successRate) {
+        gameId = gameID;
+        currentSR = successRate;
+        //take off oldest success rate and add newest success rate
+        for (int i=0; i<6; i++)
+        {
+            weekSR[gameID-1][i] = weekSR[gameID-1][i+1];
+        }
+        weekSR[gameID-1][6] = successRate;
+
+        //count # of successes past week and put into weekNumSuccess
+        weekNumSuccess[gameID-1] = 0;
+        for (int i=0; i<7; i++)
+        {
+            if(weekSR[gameID-1][i] == 1)
+            {
+                weekNumSuccess[gameID-1]++;
+            }
+        }
+
+        //update avg success rate
+        totalSR[gameID-1] += successRate;		//add to success rate running total
+        numTimes[gameID-1]++; 					//increment # of times game method used
+        avgSR[gameID-1] = totalSR[gameID-1] / numTimes[gameID-1]; 		//total success / num times used
+
+        //calculate new scores for this game method
+        scores[gameID-1] = 0.4*weekNumSuccess[gameID-1] + 0.6*avgSR[gameID-1];
+
+        //calculate new weights
+        calcWeights();
+    }
+    /********************************************
+     *********END TESTING METHOD**********
+     ********************************************/
 
 
 
@@ -234,13 +277,13 @@ public class DecisionMatrix {
         this.sum = sum;
     }
 
-    public double[] getWeights() {
-        return weights;
-    }
+    public double[] getWeights() { return weights; }
 
-    public void setWeights(double[] weights) {
-        this.weights = weights;
-    }
+    public void setWeights(double[] weights) { this.weights = weights; }
+
+    public double getCurrentSR() { return currentSR; }
+
+    public void setCurrentSR(double sr) { this.currentSR = sr; }
 
     @Override
     public String toString() {

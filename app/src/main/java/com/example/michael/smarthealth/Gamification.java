@@ -17,7 +17,11 @@ import java.util.Random;
 
 public class Gamification {
     //currently have:
-    private float level;
+    private int level;
+    private int currentexp;
+    private int maxexp;
+    private boolean levelup;
+
     private int[] badges;
 
     private String[] facts;
@@ -32,10 +36,14 @@ public class Gamification {
     //constructor
     public Gamification() {
         level = 0;
+        currentexp = 0;
+        maxexp = 50;
+        levelup = false;
+        badges = new int[4];
         for (int i=0; i<4; i++) {
             badges[i] = 0;
         }
-
+        badgeImages = new int[4];
         badgeImages[0] = R.drawable.redbadge;
         badgeImages[1] = R.drawable.greenbadge;
         badgeImages[2] = R.drawable.purplebadge;
@@ -56,15 +64,17 @@ public class Gamification {
     }
 
     //increment
-    public void addExp(float x){
-        level += x;
+    public void addExp(int x){
+        currentexp += x;
+        if (currentexp >= maxexp) {
+            level += 1;
+            maxexp = 100*level;
+            levelup = true;
+        }
     }
-    public int addBadge(int x){
+    public void addBadge(int x){
         int num = x-1;
-        int award = 0;
         badges[num] += 1;
-        award = badgeImages[num];
-        return award;
     }
 
     private String getFact() {
@@ -95,6 +105,25 @@ public class Gamification {
                 break;
         }
         return method;
+    }
+
+    public int getBadgeReward(int x) {
+        int num = x-1;
+        addBadge(num);
+        return badgeImages[num];
+    }
+
+    public String getExpReward(int x) {
+        String text = "";
+        addExp(x);
+        if (levelup){
+            text = "You've leveled up!";
+            levelup = false;
+        }
+        else
+            text = "You've gained " + x + " experience!";
+
+        return text;
     }
 
     //Getters & Setters
