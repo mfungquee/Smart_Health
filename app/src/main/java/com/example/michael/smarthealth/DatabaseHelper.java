@@ -31,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String LEVEL = "level"; //int
     public static final String CURRENTEXP = "currentexp"; //int
     public static final String MAXEXP = "maxexp"; //int
+    public static final String METHOD = "method"; //int
 
     //decision matrix specific columns
     public static final String USERID = "user"; //INT
@@ -51,7 +52,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_ID + "INTEGER PRIMARY KEY, "
             + LEVEL + " INTEGER, "
             + CURRENTEXP + " INTEGER, "
-            + MAXEXP + " INTEGER"
+            + MAXEXP + " INTEGER, "
+            + METHOD + " INTEGER"
             + ")";
 
     public static final String Create_Table_DM = "CREATE TABLE " + TABLE_DM + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
@@ -101,19 +103,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    /*
-    public boolean insertData(String name,String surname,String marks) {
+
+    public boolean insertDataDM(String id, String totalSR, String numTimes, String avgSR,
+                              String weekSR, String weekNumSuccess, String scores, double sum, String weights,
+                              double currentSR, int previousReps, int currentReps) {
+
+        //open db with ability to save
         SQLiteDatabase db = this.getWritableDatabase();
+        //store variables into contentvalues
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2,name);
-        contentValues.put(COL_3,surname);
-        contentValues.put(COL_4,marks);
-        long result = db.insert(TABLE_NAME,null ,contentValues);
+        contentValues.put(TOTALSR,totalSR);
+        contentValues.put(NUMTIMES,numTimes);
+        contentValues.put(AVGSR,avgSR);
+        contentValues.put(WEEKSR,weekSR);
+        contentValues.put(WEEKNUMSUCCESS,weekNumSuccess);
+        contentValues.put(SCORES,scores);
+        contentValues.put(SUM,sum);
+        contentValues.put(WEIGHTS,weights);
+        contentValues.put(CURRENTSR,currentSR);
+        contentValues.put(PREVIOUSREPS,previousReps);
+        contentValues.put(CURRENTREPS,currentReps);
+        long result = db.insert(TABLE_DM,null ,contentValues);
         if(result == -1)
             return false;
         else
             return true;
-    }*/
+    }
 
     public Cursor getAllDataDM() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -153,7 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updateDataG(String id, int level, int currentExp, int maxExp){
+    public boolean updateDataG(String id, int level, int currentExp, int maxExp, int method){
 
         //open db with ability to save
         SQLiteDatabase db = this.getWritableDatabase();
@@ -162,6 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(LEVEL,level);
         contentValues.put(CURRENTEXP,currentExp);
         contentValues.put(MAXEXP,maxExp);
+        contentValues.put(METHOD,method);
         //update database with values stored in content values
         db.update(TABLE_G, contentValues, "ID = ?", new String[] { id });
         return true;
