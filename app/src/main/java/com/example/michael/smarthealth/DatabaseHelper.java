@@ -137,6 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    //can only update if a value exist
     public boolean updateDataDM(String id, String totalSR, String numTimes, String avgSR,
                               String weekSR, String weekNumSuccess, String scores, double sum, String weights,
                               double currentSR, int previousReps, int currentReps) {
@@ -168,6 +169,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    //can only update if a value exists to update
     public boolean updateDataG(String id, int level, int currentExp, int maxExp, int method){
 
         //open db with ability to save
@@ -181,6 +183,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //update database with values stored in content values
         db.update(TABLE_G, contentValues, "ID = ?", new String[] { id });
         return true;
+
+    }
+
+    //can only insert if no value is in current slot of db
+    public boolean insertDataG(int level, int currentExp, int maxExp, int method){
+        //open db with ability to save
+        SQLiteDatabase db = this.getWritableDatabase();
+        //store variables into contentvalues
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(LEVEL,level);
+        contentValues.put(CURRENTEXP,currentExp);
+        contentValues.put(MAXEXP,maxExp);
+        contentValues.put(METHOD,method);
+        //db.insert returns -1 if it can't insert
+        long result = db.insert(TABLE_G,null ,contentValues);
+        if(result == -1)
+            return false;
+        else
+            return true;
 
     }
 
