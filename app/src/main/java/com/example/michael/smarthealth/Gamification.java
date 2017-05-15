@@ -158,6 +158,14 @@ public class Gamification {
             showMessage("Error", res.toString());
             return;
         }
+        do {
+            level = Integer.parseInt(res.getString(1));
+            currentexp = Integer.parseInt(res.getString(2));
+            maxexp = Integer.parseInt(res.getString(3));
+            method = Integer.parseInt(res.getString(4));
+        } while(res.moveToNext());
+
+        showMessage("Data", level + "\n" + currentexp + "\n" + maxexp + "\n" + method);
     }
 
     private void showMessage(String title, String Message) {
