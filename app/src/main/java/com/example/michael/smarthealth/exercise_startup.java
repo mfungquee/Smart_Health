@@ -23,7 +23,7 @@ public class exercise_startup extends AppCompatActivity {
     //this needs to have been created at the start of the app
     DecisionMatrix dm;
     Gamification gm;
-    int method = 0;     //this has to persist until exercise_rewards
+    int method;     //this has to persist until exercise_rewards
     /************ END TESTING VARIABLES ***********/
 
     public void functionsUI(){
@@ -39,7 +39,8 @@ public class exercise_startup extends AppCompatActivity {
         buttonContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dm.updateDB();
+                gm.updateDB();
                 Intent intent = new Intent(v.getContext(), exercise_continue.class); //intent is the link between pages
                 startActivity(intent); //when button is pressed, move from activity1 to activity2
                 finish(); //take off stack so user can't return with back button

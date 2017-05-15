@@ -97,7 +97,7 @@ public class Gamification {
     public String getString(int x) {
         int num = x-1;
         String method = "";
-        switch (x) {
+        switch (num) {
             case 0:
                 method = "you will gain levels";
                 break;
@@ -148,7 +148,7 @@ public class Gamification {
 
     //trying to get around the id field in db.update(...)  with "1"
     public void updateDB(){
-        db.updateDataG("1", level, currentexp, maxexp, method);
+        db.updateDataG(level, currentexp, maxexp, method);
     }
 
     public void updateG(){

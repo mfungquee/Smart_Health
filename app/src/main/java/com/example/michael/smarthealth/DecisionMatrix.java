@@ -8,6 +8,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 
 import java.util.Arrays;
+import java.util.Random;
+
 import android.database.Cursor;
 
 /******************************************************************************
@@ -51,9 +53,9 @@ public class DecisionMatrix {
     private double[] scores; // scores
     private double sum; // Sum of Totals
     private double[] weights; // Weights
-    private int previousReps;
-    private int currentReps;
-    private double currentSR;
+    private int[] previousReps;
+    private int[] currentReps;
+    private double[] currentSR;
 
     public DecisionMatrix(Context c) {
         context = c;
@@ -67,6 +69,9 @@ public class DecisionMatrix {
         scores = new double[5];
         sum = 0.0;
         weights = new double[5];
+        currentSR = new double[5];
+        previousReps = new int[5];
+        currentReps = new int[5];
 
         for (int i = 0; i < 5; i++) {
             totalSR[i] = 0;
@@ -74,6 +79,9 @@ public class DecisionMatrix {
             avgSR[i] = 0;
             weekNumSuccess[i] = 0;
             scores[i] = 0;
+            currentSR[i] = 0;
+            previousReps[i] = 1;
+            currentReps[i] = 1;
         }
 
         // default weekly successes
@@ -85,10 +93,6 @@ public class DecisionMatrix {
 
         // default weights
         calcWeights();
-
-        currentSR = 0;
-        previousReps = 1;
-        currentReps = 1;
     }
 
     /********************************************
@@ -112,10 +116,12 @@ public class DecisionMatrix {
      * public methods
      ********************************************/
     public int chooseMethod() {
+
+        /*
         // choose a random number and see which method gets chosen depending on
         // weights
         double num = Math.random(); // random # between 0 and 1
-        double limit = weights[0]; // first limit is up to levelsWeight
+        double limit = 0; // first limit is up to levelsWeight
         int i = 0; // weights array index
 
         while (num > limit)
@@ -126,6 +132,12 @@ public class DecisionMatrix {
         }
 
         return i;
+        */
+
+        //choose a pure random method 1-3
+        Random r = new Random();
+        return r.nextInt(3)+1;
+
     }
 
 
@@ -143,6 +155,9 @@ public class DecisionMatrix {
         String weekNumSuccessString = Arrays.toString(weekNumSuccess);
         String scoresString = Arrays.toString(scores);
         String weightsString = Arrays.toString(weights);
+        String currentSRString = Arrays.toString(currentSR);
+        String previousRepsString = Arrays.toString(previousReps);
+        String currentRepsString = Arrays.toString(currentReps);
         db.insertDataDM(
                 userIDString,
                 totalSRString,
@@ -153,9 +168,9 @@ public class DecisionMatrix {
                 scoresString,
                 sum,
                 weightsString,
-                currentSR,
-                previousReps,
-                currentReps);
+                currentSRString,
+                previousRepsString,
+                currentRepsString);
     }
 
 
@@ -174,6 +189,9 @@ public class DecisionMatrix {
         String weekNumSuccessString = Arrays.toString(weekNumSuccess);
         String scoresString = Arrays.toString(scores);
         String weightsString = Arrays.toString(weights);
+        String currentSRString = Arrays.toString(currentSR);
+        String previousRepsString = Arrays.toString(previousReps);
+        String currentRepsString = Arrays.toString(currentReps);
 
         db.updateDataDM(
                 userIDString,
@@ -185,9 +203,9 @@ public class DecisionMatrix {
                 scoresString,
                 sum,
                 weightsString,
-                currentSR,
-                previousReps,
-                currentReps);
+                currentSRString,
+                previousRepsString,
+                currentRepsString);
     }
 
 
@@ -205,7 +223,7 @@ public class DecisionMatrix {
 
             res.getString(1);
 
-            String x = res.getString(2).replaceAll("\\[","").replaceAll("\\]",",");
+            String x = res.getString(2).replaceAll("\\[","").replaceAll("\\]","");
             String[] s = x.split(",");
             for (int i=0; i<5; i++) {
                     totalSR[i] = Double.parseDouble(s[i]);
@@ -221,7 +239,7 @@ public class DecisionMatrix {
                     numTimes[i] = Integer.parseInt(s[i].substring(1));
             }
 
-            x = res.getString(4).replaceAll("\\[","").replaceAll("\\]",",");
+            x = res.getString(4).replaceAll("\\[","").replaceAll("\\]","");
             s = x.split(",");
             for (int i=0; i<5; i++) {
                     avgSR[i] = Double.parseDouble(s[i]);
@@ -250,7 +268,7 @@ public class DecisionMatrix {
                     weekNumSuccess[i] = Integer.parseInt(s[i].substring(1));
             }
 
-            x = res.getString(7).replaceAll("\\[","").replaceAll("\\]",",");
+            x = res.getString(7).replaceAll("\\[","").replaceAll("\\]","");
             s = x.split(",");
             for (int i=0; i<5; i++) {
                     scores[i] = Double.parseDouble(s[i]);
@@ -263,23 +281,36 @@ public class DecisionMatrix {
                 sum = Double.parseDouble(res.getString(8));
             }
 
-            x = res.getString(9).replaceAll("\\[","").replaceAll("\\]",",");
+            x = res.getString(9).replaceAll("\\[","").replaceAll("\\]","");
             s = x.split(",");
             for (int i=0; i<5; i++) {
                     scores[i] = Double.parseDouble(s[i]);
             }
 
-            currentSR = Integer.parseInt(res.getString(10));
+            x = res.getString(10).replaceAll("\\[","").replaceAll("\\]","");
+            s = x.split(",");
+            for (int i=0; i<5; i++) {
+                currentSR[i] = Double.parseDouble(s[i]);
+            }
 
-            previousReps = Integer.parseInt(res.getString(11));
+            //x = res.getString(11).replaceAll("\\[","").replaceAll("\\]","");
+            //s = x.split(",");
+            s = res.getString(11).split(",");
+            for (int i=0; i<5; i++) {
+                if (i==0)
+                    previousReps[i] = Integer.parseInt(s[i].substring(1));
+            }
 
-            currentReps = Integer.parseInt(res.getString(12));
+            //x = res.getString(12).replaceAll("\\[","").replaceAll("\\]","");
+            //s = x.split(",");
+            s = res.getString(12).split(",");
+            for (int i=0; i<5; i++) {
+                if (i==0)
+                currentReps[i] = Integer.parseInt(s[i].substring(1));
+            }
 
         } while(res.moveToNext());
 
-        /*
-        showMessage("Data", toString());
-        */
     }
 
     private void showMessage(String title, String Message) {
@@ -290,30 +321,33 @@ public class DecisionMatrix {
         builder.show();
     }
 
+    public void display(){
+        showMessage("Data", toString());
+    }
 
     public void update(int gameID, int reps) {
-        previousReps = currentReps;
-        currentReps = reps;
-        currentSR = (currentReps - previousReps)/previousReps;
+        previousReps[gameID-1] = currentReps[gameID-1];
+        currentReps[gameID-1] = reps;
+        currentSR[gameID-1] = (currentReps[gameID-1] - previousReps[gameID-1])/previousReps[gameID-1];
         //take off oldest success rate and add newest success rate
         for (int i=0; i<6; i++)
         {
             weekSR[gameID-1][i] = weekSR[gameID-1][i+1];
         }
-        weekSR[gameID-1][6] = currentSR;
+        weekSR[gameID-1][6] = currentSR[gameID-1];
 
         //count # of successes past week and put into weekNumSuccess
         weekNumSuccess[gameID-1] = 0;
         for (int i=0; i<7; i++)
         {
-            if(weekSR[gameID-1][i] == 1)
+            if(weekSR[gameID-1][i] >= 0)
             {
                 weekNumSuccess[gameID-1]++;
             }
         }
 
         //update avg success rate
-        totalSR[gameID-1] += currentSR;		//add to success rate running total
+        totalSR[gameID-1] += currentSR[gameID-1];		//add to success rate running total
         numTimes[gameID-1]++; 					//increment # of times game method used
         avgSR[gameID-1] = totalSR[gameID-1] / numTimes[gameID-1]; 		//total success / num times used
 
@@ -322,10 +356,19 @@ public class DecisionMatrix {
 
         //calculate new weights
         calcWeights();
+
+        //showMessage("Data", toString());
     }
 
 
-
+    public double getAllCurrentSR() {
+        double avg = 0.0;
+        for (int i=0; i<5; i++){
+            avg += currentSR[i];
+        }
+        avg = avg/5;
+        return avg;
+    }
 
 
     /********************************************
@@ -400,17 +443,17 @@ public class DecisionMatrix {
 
     public void setWeights(double[] weights) { this.weights = weights; }
 
-    public double getPreviousReps() { return previousReps; }
+    public int[] getPreviousReps() { return previousReps; }
 
-    public void setPreviousReps(int reps) { this.previousReps = reps; }
+    public void setPreviousReps(int[] reps) { this.previousReps = reps; }
 
-    public double getCurrentReps() { return currentReps; }
+    public int[] getCurrentReps() { return currentReps; }
 
-    public void setCurrentReps(int reps) { this.currentReps = reps; }
+    public void setCurrentReps(int[] reps) { this.currentReps = reps; }
 
-    public double getCurrentSR() { return currentSR; }
+    public double getCurrentSR(int gameID) { return currentSR[gameID-1]; }
 
-    public void setCurrentSR(double sr) { this.currentSR = sr; }
+    public void setCurrentSR(int gameID, double sr) { this.currentSR[gameID-1] = sr; }
 
     @Override
     public String toString() {

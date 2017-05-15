@@ -134,7 +134,7 @@ public class exercise_continue extends AppCompatActivity {
                 dm.update(method, sumReps);
 
                 dm.updateDB();
-                //gm.updateDB();
+                gm.updateDB();
 
                 Intent intent = new Intent(v.getContext(), exercise_rewards.class); //intent is the link between pages
                 startActivity(intent); //when button is pressed, move from activity1 to activity2

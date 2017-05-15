@@ -19,6 +19,18 @@ public class MainActivity extends AppCompatActivity {
     //functions for UI interactions
     public void functionsUI(){
 
+        dm.update(1,10);
+        dm.update(2,10);
+        dm.update(3,10);
+        dm.update(4,1);
+        dm.update(5,1);
+
+        dm.update(1,20);
+        dm.update(2,30);
+        dm.update(3,40);
+        dm.update(4,1);
+        dm.update(5,1);
+
         dm.insertDB();
         gm.insertDB();
 

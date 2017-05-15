@@ -66,9 +66,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + SCORES + " STRING, "
             + SUM + " DOUBLE, "
             + WEIGHTS + " STRING, "
-            + CURRENTSR + " DOUBLE, "
-            + PREVIOUSREPS + " INTEGER, "
-            + CURRENTREPS + " INTEGER"
+            + CURRENTSR + " STRING, "
+            + PREVIOUSREPS + " STRING, "
+            + CURRENTREPS + " STRING"
             + ")";
 
     public static synchronized DatabaseHelper getInstance(Context context){
@@ -106,7 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean insertDataDM(String id, String totalSR, String numTimes, String avgSR,
                               String weekSR, String weekNumSuccess, String scores, double sum, String weights,
-                              double currentSR, int previousReps, int currentReps) {
+                                String currentSR, String previousReps, String currentReps) {
 
         //open db with ability to save
         SQLiteDatabase db = this.getWritableDatabase();
@@ -140,7 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //can only update if a value exist
     public boolean updateDataDM(String id, String totalSR, String numTimes, String avgSR,
                               String weekSR, String weekNumSuccess, String scores, double sum, String weights,
-                              double currentSR, int previousReps, int currentReps) {
+                              String currentSR, String previousReps, String currentReps) {
 
         //open db with ability to save
         SQLiteDatabase db = this.getWritableDatabase();
@@ -170,7 +170,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //can only update if a value exists to update
-    public boolean updateDataG(String id, int level, int currentExp, int maxExp, int method){
+    public boolean updateDataG(int level, int currentExp, int maxExp, int method){
 
         //open db with ability to save
         SQLiteDatabase db = this.getWritableDatabase();
@@ -181,7 +181,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(MAXEXP,maxExp);
         contentValues.put(METHOD,method);
         //update database with values stored in content values
-        db.update(TABLE_G, contentValues, "ID = ?", new String[] { id });
+        db.update(TABLE_G, contentValues, null, null);
         return true;
 
     }

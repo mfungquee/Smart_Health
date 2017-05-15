@@ -49,24 +49,5 @@
             android:layout_alignStart="@+id/buttonSettings"
             android:text="Progress" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome Firstname!"
-            android:id="@+id/textView"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/buttonExercise"
-            android:layout_alignStart="@+id/buttonExercise"
-            android:layout_marginTop="36dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exp"
-            android:id="@+id/textView2"
-            android:layout_below="@+id/textView"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView"
-            android:layout_marginTop="32dp" />
     </RelativeLayout>
 </LinearLayout>
