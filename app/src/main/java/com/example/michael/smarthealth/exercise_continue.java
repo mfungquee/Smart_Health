@@ -31,7 +31,7 @@ public class exercise_continue extends AppCompatActivity {
     public Integer images[] = {R.drawable.pullup, R.drawable.pushup, R.drawable.situp, R.drawable.squat};
     public int exerciseImage = 0;
 
-    DecisionMatrix dm = new DecisionMatrix();
+    DecisionMatrix dm = new DecisionMatrix(this);
     int sumReps;
     int method = 1; //this has to be brought in from exercise_startup.
 

@@ -4,7 +4,11 @@ package com.example.michael.smarthealth;
  * Created by Robin on 4/15/2017.
  */
 
+import android.app.AlertDialog;
+import android.content.Context;
+
 import java.util.Arrays;
+import android.database.Cursor;
 
 /******************************************************************************
  * Create a DecisionMatrix for each exercise
@@ -35,6 +39,8 @@ import java.util.Arrays;
  *******************************************************************************/
 
 public class DecisionMatrix {
+    private Context context;
+    public DatabaseHelper db;
 
     private int userID; // user ID
 
@@ -53,7 +59,9 @@ public class DecisionMatrix {
     private int currentReps;
     private double currentSR;       //
 
-    public DecisionMatrix() {
+    public DecisionMatrix(Context c) {
+        context = c;
+        db = new DatabaseHelper(context);
         userID = 1;         //get this from db.
         totalSR = new double[5];
         numTimes = new int[5];
@@ -119,6 +127,73 @@ public class DecisionMatrix {
         }
 
         return i;
+    }
+
+    public void updateDB() {
+        //conversions to , separated strings
+        String userIDString = Integer.toString(userID);
+        String totalSRString = Arrays.toString(totalSR);
+        String numTimesString = Arrays.toString(numTimes);
+        String avgSRString = Arrays.toString(avgSR);
+        String weekSRString = "";
+        for (int i=0; i<5; i++)
+        {
+            weekSRString += "\n"+ Arrays.toString(weekSR[i]);
+        }
+        String weekNumSuccessString = Arrays.toString(weekNumSuccess);
+        String scoresString = Arrays.toString(scores);
+        String weightsString = Arrays.toString(weights);
+        db.updateDataDM(
+                userIDString,
+                totalSRString,
+                numTimesString,
+                avgSRString,
+                weekSRString,
+                weekNumSuccessString,
+                scoresString,
+                sum,
+                weightsString,
+                currentSR,
+                previousReps,
+                currentReps);
+        showMessage("db.updateDataDM() updated DB",
+                userIDString + "\n"
+                + totalSRString);
+    }
+
+    public void updateDM() {
+
+        Cursor res = db.getAllDataDM();
+        res.moveToFirst();
+        if (res.getCount()==0) {
+            showMessage("Error", "Nothing found");
+            return;
+
+        }
+        StringBuffer buffer = new StringBuffer();
+        do {
+            buffer.append("user :"+ res.getString(0)+"\n");
+            buffer.append("totalSR :"+ res.getString(1)+"\n");
+            buffer.append("numTimes :"+ res.getString(2)+"\n");
+            buffer.append("avgSR :"+ res.getString(3)+"\n\n");
+            buffer.append("weekSR :"+ res.getString(4)+"\n\n");
+            buffer.append("weekNumSuccess :"+ res.getString(5)+"\n\n");
+            buffer.append("scores :"+ res.getString(6)+"\n\n");
+            buffer.append("sum :"+ res.getString(7)+"\n\n");
+            buffer.append("weights :"+ res.getString(8)+"\n\n");
+            buffer.append("currentSR :"+ res.getString(9)+"\n\n");
+            buffer.append("previousReps :"+ res.getString(10)+"\n\n");
+            buffer.append("currentReps :"+ res.getString(11)+"\n\n");
+        } while(res.moveToNext());
+        showMessage("Data", buffer.toString());
+    }
+
+    private void showMessage(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
     }
 
 	/*  this is to be called after a new entry has been added to db progress table

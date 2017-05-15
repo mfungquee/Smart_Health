@@ -17,7 +17,6 @@ import static android.R.attr.id;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    DecisionMatrix myDM = new DecisionMatrix();
     //database name
     public static final String DATABASE_NAME = "smarthealth.db";
     //tables used
@@ -48,13 +47,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CURRENTREPS = "currentReps"; //INT
 
     //Table Creation statements (sqlite statements to be executed with java functions)
-    public static final String Create_Table_G= "CREATE TABLE " + TABLE_G + "(" + KEY_ID + "INTEGER PRIMARY KEY,"
-            + LEVEL + " INTEGER," + CURRENTEXP + " INTEGER," + MAXEXP + " INTEGER" + ")";
+    public static final String Create_Table_G= "CREATE TABLE " + TABLE_G + "("
+            + KEY_ID + "INTEGER PRIMARY KEY, "
+            + LEVEL + " INTEGER, "
+            + CURRENTEXP + " INTEGER, "
+            + MAXEXP + " INTEGER"
+            + ")";
 
-    public static final String Create_Table_DM = "CREATE TABLE " + TABLE_DM + "(" + KEY_ID + "INTEGER PRIMARY KEY,"
-            + USERID + " INTEGER," + TOTALSR + " DOUBLE," + NUMTIMES + " INTEGER," + AVGSR + " DOUBLE,"
-            + WEEKSR + " DOUBLE,"  + WEEKNUMSUCCESS + " INTEGER,"  + SCORES + " DOUBLE," + SUM + " DOUBLE,"
-            + WEIGHTS + " DOUBLE,"  + CURRENTSR + " DOUBLE,"  + PREVIOUSREPS + " INTEGER,"  + CURRENTREPS + " INTEGER," + ")";
+    public static final String Create_Table_DM = "CREATE TABLE " + TABLE_DM + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
+            + USERID + " STRING, "
+            + TOTALSR + " STRING, "
+            + NUMTIMES + " STRING, "
+            + AVGSR + " STRING, "
+            + WEEKSR + " STRING, "
+            + WEEKNUMSUCCESS + " STRING, "
+            + SCORES + " STRING, "
+            + SUM + " DOUBLE, "
+            + WEIGHTS + " STRING, "
+            + CURRENTSR + " DOUBLE, "
+            + PREVIOUSREPS + " INTEGER, "
+            + CURRENTREPS + " INTEGER"
+            + ")";
 
 
     public DatabaseHelper(Context context) {
@@ -94,12 +107,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllDataDM() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_DM, null);
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_DM, null);
         return res;
     }
 
-    public boolean updateDataDM(String id, double totalSR, int numTimes, double avgSR,
-                              double weekSR, double scores, double sum, double weights,
+    public boolean updateDataDM(String id, String totalSR, String numTimes, String avgSR,
+                              String weekSR, String weekNumSuccess, String scores, double sum, String weights,
                               double currentSR, int previousReps, int currentReps) {
 
         //open db with ability to save
@@ -110,6 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(NUMTIMES,numTimes);
         contentValues.put(AVGSR,avgSR);
         contentValues.put(WEEKSR,weekSR);
+        contentValues.put(WEEKNUMSUCCESS,weekNumSuccess);
         contentValues.put(SCORES,scores);
         contentValues.put(SUM,sum);
         contentValues.put(WEIGHTS,weights);
