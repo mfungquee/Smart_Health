@@ -29,18 +29,11 @@ public class exercise_startup extends AppCompatActivity {
     public void functionsUI(){
         /* remove from here */
 
-        dm.update(1, 10);
-        dm.update(1, 20);
-        dm.update(1, 30);
-        dm.update(1, 40);
-        dm.update(2, 10);
-        dm.update(2, 30);
-        dm.update(2, 50);
-        dm.update(2, 70);
-        dm.update(3, 10);
-        dm.update(3, 40);
-        dm.update(3, 70);
-        dm.update(3, 100);
+        dm.update(1,10);
+        dm.update(2,20);
+        dm.update(3,30);
+        dm.update(4,40);
+        dm.update(5,50);
 
         dm.updateDB();
 

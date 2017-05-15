@@ -43,21 +43,17 @@ public class DecisionMatrix {
     public DatabaseHelper db;
 
     private int userID; // user ID
-
     private double[] totalSR; // Running total of success rates
     private int[] numTimes; // count of how many of each was done;
     private double[] avgSR; // average success rates
-
     private double[][] weekSR; // Keep track of last 7 success rates
     private int[] weekNumSuccess; // # of weekly successes
-
     private double[] scores; // scores
     private double sum; // Sum of Totals
     private double[] weights; // Weights
-
     private int previousReps;
     private int currentReps;
-    private double currentSR;       //
+    private double currentSR;
 
     public DecisionMatrix(Context c) {
         context = c;
@@ -72,9 +68,12 @@ public class DecisionMatrix {
         sum = 0.0;
         weights = new double[5];
 
-        // default scores for decision matrix
         for (int i = 0; i < 5; i++) {
-            scores[i] = 1;
+            totalSR[i] = 0;
+            numTimes[i] = 0;
+            avgSR[i] = 0;
+            weekNumSuccess[i] = 0;
+            scores[i] = 0;
         }
 
         // default weekly successes
@@ -200,22 +199,70 @@ public class DecisionMatrix {
             return;
 
         }
-        StringBuffer buffer = new StringBuffer();
+
+
         do {
-            buffer.append("user :"+ res.getString(0)+"\n");
-            buffer.append("totalSR :"+ res.getString(1)+"\n");
-            buffer.append("numTimes :"+ res.getString(2)+"\n");
-            buffer.append("avgSR :"+ res.getString(3)+"\n\n");
-            buffer.append("weekSR :"+ res.getString(4)+"\n\n");
-            buffer.append("weekNumSuccess :"+ res.getString(5)+"\n\n");
-            buffer.append("scores :"+ res.getString(6)+"\n\n");
-            buffer.append("sum :"+ res.getString(7)+"\n\n");
-            buffer.append("weights :"+ res.getString(8)+"\n\n");
-            buffer.append("currentSR :"+ res.getString(9)+"\n\n");
-            buffer.append("previousReps :"+ res.getString(10)+"\n\n");
-            buffer.append("currentReps :"+ res.getString(11)+"\n\n");
+            userID = Integer.parseInt(res.getString(0));
+
+            String[] s = res.getString(2).substring(1,res.getString(2).length()-2).split(",");
+            for (int i=0; i<5; i++)
+                totalSR[i] = Double.parseDouble(s[i]);
+
+            s = res.getString(3).substring(1,res.getString(3).length()-2).split(",");
+            for (int i=0; i<5; i++)
+                numTimes[i] = Integer.parseInt(s[i].trim());
+
+            s = res.getString(4).substring(1,res.getString(4).length()-2).split(",");
+            for (int i=0; i<5; i++)
+                avgSR[i] = Double.parseDouble(s[i]);
+
+            s = res.getString(5).split(",");
+            int k = 1;
+            for (int i=0; i<5; i++) {
+                for (int j = 0; j < 7; j++) {
+                    if (j == 0) {
+                        weekSR[i][j] = Double.parseDouble(s[k].substring(1));
+                    }
+                    else if (j == 6) {
+                        weekSR[i][j] = Double.parseDouble(s[k].substring(0, s[k].length()-2));
+                        k+=2;
+                    }
+                    else {
+                        weekSR[i][j] = Double.parseDouble(s[k]);
+                    }
+                    k++;
+                }
+            }
+
+            s = res.getString(6).substring(1,res.getString(6).length()-2).split(",");
+            for (int i=0; i<5; i++)
+                weekNumSuccess[i] = Integer.parseInt(s[i]);
+
+            s = res.getString(7).substring(1,res.getString(7).length()-2).split(",");
+            for (int i=0; i<5; i++)
+                scores[i] = Double.parseDouble(s[i]);
+
+            sum = Integer.parseInt(res.getString(8));
+
+            s = res.getString(9).substring(1,res.getString(9).length()-2).split(",");
+            for (int i=0; i<5; i++)
+                scores[i] = Double.parseDouble(s[i]);
+
+            currentSR = Integer.parseInt(res.getString(10));
+
+            previousReps = Integer.parseInt(res.getString(11));
+
+            currentReps = Integer.parseInt(res.getString(12));
+
         } while(res.moveToNext());
-        showMessage("Data", buffer.toString());
+
+        showMessage("Data", toString());
+
+        /*
+        //String[] s = res.getString(1).split(",");
+        showMessage("test", res.getString(0) + "\n" + res.getString(1) + "\n" + res.getString(2)
+                + "\n" + res.getString(3));
+        */
     }
 
     private void showMessage(String title, String Message) {
