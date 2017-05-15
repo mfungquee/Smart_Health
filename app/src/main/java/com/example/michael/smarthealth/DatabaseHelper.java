@@ -187,7 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //can only insert if no value is in current slot of db
-    public boolean insertDataG(int level, int currentExp, int maxExp, int method){
+    public boolean insertDataG(String id, int level, int currentExp, int maxExp, int method){
         //open db with ability to save
         SQLiteDatabase db = this.getWritableDatabase();
         //store variables into contentvalues

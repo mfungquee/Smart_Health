@@ -77,7 +77,7 @@ public class exercise_rewards extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO: send workout information into database
                 dm.updateDB();
-                gm.updateDB();
+                //gm.updateDB();
                 Intent intent = new Intent(v.getContext(), main_screen.class); //intent is the link between pages
                 startActivity(intent); //when button is pressed, move from activity1 to activity2
 

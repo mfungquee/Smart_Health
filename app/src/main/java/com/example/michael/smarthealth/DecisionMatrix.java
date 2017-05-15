@@ -256,7 +256,12 @@ public class DecisionMatrix {
                     scores[i] = Double.parseDouble(s[i]);
             }
 
-            sum = Double.parseDouble(res.getString(8));
+            if (res.getString(8) == null){
+                sum = 0;
+            }
+            else {
+                sum = Double.parseDouble(res.getString(8));
+            }
 
             x = res.getString(9).replaceAll("\\[","").replaceAll("\\]",",");
             s = x.split(",");

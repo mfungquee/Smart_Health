@@ -143,7 +143,7 @@ public class Gamification {
      ***********************/
 
     public void insertDB(){
-        db.insertDataG(level, currentexp, maxexp, method);
+        db.insertDataG("1", level, currentexp, maxexp, method);
     }
 
     //trying to get around the id field in db.update(...)  with "1"
@@ -155,7 +155,7 @@ public class Gamification {
         Cursor res = db.getAllDataG();
         res.moveToFirst();
         if (res.getCount()==0) {
-            showMessage("Error", res.toString());
+            showMessage("Error", res.toString() + "G");
             return;
         }
         do {
