@@ -167,4 +167,11 @@ public class Gamification {
         builder.setMessage(Message);
         builder.show();
     }
+
+    public int getMethod(){
+        return method+1;
+    }
+    public void setMethod(int m) {
+        method = m-1;
+    }
 }

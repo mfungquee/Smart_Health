@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper db;
     DecisionMatrix dm;
+    Gamification gm;
 
     //xml ids of buttons
     public Button buttonCreateNewAccount;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public void functionsUI(){
 
         dm.insertDB();
+        gm.insertDB();
 
         buttonCreateNewAccount = (Button)findViewById(R.id.buttonCreateNewAccount); //reference to button from xml
 
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         db = DatabaseHelper.getInstance(this);
         dm = new DecisionMatrix(this);
+        gm = new Gamification(this);        //add "this"
         functionsUI(); //UI functionality
     }
 
