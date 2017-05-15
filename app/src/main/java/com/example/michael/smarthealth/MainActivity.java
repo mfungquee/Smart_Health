@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     //functions for UI interactions
     public void functionsUI(){
 
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
         buttonCreateNewAccount = (Button)findViewById(R.id.buttonCreateNewAccount); //reference to button from xml
 
         buttonCreateNewAccount.setOnClickListener(new View.OnClickListener() {

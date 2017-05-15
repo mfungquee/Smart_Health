@@ -16,13 +16,13 @@ import static android.R.attr.id;
  * Created by ProgrammingKnowledge on 4/3/2015.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
+    private static DatabaseHelper sInstance;
 
     //database name
     public static final String DATABASE_NAME = "smarthealth.db";
     //tables used
     public static final String TABLE_G = "Gamification_Table";
     public static final String TABLE_DM= "Decision_Matrix_Table";
-
 
     //column names
     public static final String KEY_ID = "id";
@@ -69,6 +69,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + CURRENTREPS + " INTEGER"
             + ")";
 
+    public static synchronized DatabaseHelper getInstance(Context context){
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (sInstance == null) {
+            sInstance = new DatabaseHelper(context.getApplicationContext());
+        }
+        return sInstance;
+    }
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -108,6 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getAllDataDM() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_DM, null);
+        res.moveToFirst();
         return res;
     }
 

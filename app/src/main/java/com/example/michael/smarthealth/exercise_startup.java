@@ -21,7 +21,7 @@ public class exercise_startup extends AppCompatActivity {
 
     /************ TESTING VARIABLES ***********/
     //this needs to have been created at the start of the app
-    DecisionMatrix dm = new DecisionMatrix(this);
+    DecisionMatrix dm;
     Gamification gm = new Gamification();
     int method = 1;     //this has to persist until exercise_rewards
     /************ END TESTING VARIABLES ***********/
@@ -80,6 +80,7 @@ public class exercise_startup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_startup);
+        dm = new DecisionMatrix(this);
         functionsUI();
     }
 }

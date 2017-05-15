@@ -61,7 +61,7 @@ public class DecisionMatrix {
 
     public DecisionMatrix(Context c) {
         context = c;
-        db = new DatabaseHelper(context);
+        db = DatabaseHelper.getInstance(context);
         userID = 1;         //get this from db.
         totalSR = new double[5];
         numTimes = new int[5];
@@ -156,6 +156,7 @@ public class DecisionMatrix {
                 currentSR,
                 previousReps,
                 currentReps);
+
         showMessage("db.updateDataDM() updated DB",
                 userIDString + "\n"
                 + totalSRString);
@@ -166,7 +167,7 @@ public class DecisionMatrix {
         Cursor res = db.getAllDataDM();
         res.moveToFirst();
         if (res.getCount()==0) {
-            showMessage("Error", "Nothing found");
+            showMessage("Error", Integer.toString(res.getCount()));
             return;
 
         }
