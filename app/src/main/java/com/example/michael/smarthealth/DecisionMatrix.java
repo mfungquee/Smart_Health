@@ -200,53 +200,69 @@ public class DecisionMatrix {
 
         }
 
-
         do {
             userID = Integer.parseInt(res.getString(0));
 
-            String[] s = res.getString(2).substring(1,res.getString(2).length()-2).split(",");
-            for (int i=0; i<5; i++)
-                totalSR[i] = Double.parseDouble(s[i]);
+            res.getString(1);
 
-            s = res.getString(3).substring(1,res.getString(3).length()-2).split(",");
-            for (int i=0; i<5; i++)
-                numTimes[i] = Integer.parseInt(s[i].trim());
-
-            s = res.getString(4).substring(1,res.getString(4).length()-2).split(",");
-            for (int i=0; i<5; i++)
-                avgSR[i] = Double.parseDouble(s[i]);
-
-            s = res.getString(5).split(",");
-            int k = 1;
+            String x = res.getString(2).replaceAll("\\[","").replaceAll("\\]",",");
+            String[] s = x.split(",");
             for (int i=0; i<5; i++) {
-                for (int j = 0; j < 7; j++) {
-                    if (j == 0) {
-                        weekSR[i][j] = Double.parseDouble(s[k].substring(1));
-                    }
-                    else if (j == 6) {
-                        weekSR[i][j] = Double.parseDouble(s[k].substring(0, s[k].length()-2));
-                        k+=2;
-                    }
-                    else {
-                        weekSR[i][j] = Double.parseDouble(s[k]);
-                    }
+                    totalSR[i] = Double.parseDouble(s[i]);
+            }
+
+            /*
+            x = res.getString(3).replaceAll("\\[","").replaceAll("\\]",",");
+            s = x.split(",");
+            */
+            s = res.getString(3).split(",");
+            for (int i=0; i<5; i++) {
+                if (i==0)
+                    numTimes[i] = Integer.parseInt(s[i].substring(1));
+            }
+
+            x = res.getString(4).replaceAll("\\[","").replaceAll("\\]",",");
+            s = x.split(",");
+            for (int i=0; i<5; i++) {
+                    avgSR[i] = Double.parseDouble(s[i]);
+            }
+
+            x = res.getString(5);
+            x = x.replace("\n", "").replace("\r","");
+            x = x.replaceAll("\\[","").replaceAll("\\]",",");
+            String[] y = x.split(",");
+            int k = 0;
+            for (int i=0; i<5; i++) {
+                for (int j = 0; j<7; j++) {
+
+                        weekSR[i][j] = Double.parseDouble(y[k]);
+
                     k++;
                 }
             }
+            /*
+            x = res.getString(6).replaceAll("\\[","").replaceAll("\\]",",");
+            s = x.split(",");
+            */
+            s = res.getString(6).split(",");
+            for (int i=0; i<5; i++) {
+                if(i==0)
+                    weekNumSuccess[i] = Integer.parseInt(s[i].substring(1));
+            }
 
-            s = res.getString(6).substring(1,res.getString(6).length()-2).split(",");
-            for (int i=0; i<5; i++)
-                weekNumSuccess[i] = Integer.parseInt(s[i]);
+            x = res.getString(7).replaceAll("\\[","").replaceAll("\\]",",");
+            s = x.split(",");
+            for (int i=0; i<5; i++) {
+                    scores[i] = Double.parseDouble(s[i]);
+            }
 
-            s = res.getString(7).substring(1,res.getString(7).length()-2).split(",");
-            for (int i=0; i<5; i++)
-                scores[i] = Double.parseDouble(s[i]);
+            sum = Double.parseDouble(res.getString(8));
 
-            sum = Integer.parseInt(res.getString(8));
-
-            s = res.getString(9).substring(1,res.getString(9).length()-2).split(",");
-            for (int i=0; i<5; i++)
-                scores[i] = Double.parseDouble(s[i]);
+            x = res.getString(9).replaceAll("\\[","").replaceAll("\\]",",");
+            s = x.split(",");
+            for (int i=0; i<5; i++) {
+                    scores[i] = Double.parseDouble(s[i]);
+            }
 
             currentSR = Integer.parseInt(res.getString(10));
 
