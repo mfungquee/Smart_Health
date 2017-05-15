@@ -4,6 +4,10 @@ package com.example.michael.smarthealth;
  * Created by Robin on 5/13/2017.
  */
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.database.Cursor;
+
 import java.util.Random;
 
 /**
@@ -16,10 +20,13 @@ import java.util.Random;
  */
 
 public class Gamification {
+    private Context context;
+    public DatabaseHelper db;
     //currently have:
     private int level;
     private int currentexp;
     private int maxexp;
+    private int method;
     private boolean levelup;
 
     private int[] badges;
@@ -34,10 +41,13 @@ public class Gamification {
     private int[] badgeImages;
 
     //constructor
-    public Gamification() {
+    public Gamification(Context c) {
+        context = c;
+        db = DatabaseHelper.getInstance(context);
         level = 0;
         currentexp = 0;
         maxexp = 50;
+        method = 0;
         levelup = false;
         badges = new int[4];
         for (int i=0; i<4; i++) {
@@ -128,4 +138,33 @@ public class Gamification {
 
     //Getters & Setters
 
+    /***********************
+     Database functions
+     ***********************/
+
+    public void insertDB(){
+        db.insertDataG(level, currentexp, maxexp, method);
+    }
+
+    //trying to get around the id field in db.update(...)  with "1"
+    public void updateDB(){
+        db.updateDataG("1", level, currentexp, maxexp, method);
+    }
+
+    public void updateG(){
+        Cursor res = db.getAllDataG();
+        res.moveToFirst();
+        if (res.getCount()==0) {
+            showMessage("Error", res.toString());
+            return;
+        }
+    }
+
+    private void showMessage(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
+    }
 }
