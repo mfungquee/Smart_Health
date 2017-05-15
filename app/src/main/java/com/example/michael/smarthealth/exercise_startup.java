@@ -22,23 +22,12 @@ public class exercise_startup extends AppCompatActivity {
     /************ TESTING VARIABLES ***********/
     //this needs to have been created at the start of the app
     DecisionMatrix dm;
-    Gamification gm = new Gamification();
-    int method = 1;     //this has to persist until exercise_rewards
+    Gamification gm;
+    int method = 0;     //this has to persist until exercise_rewards
     /************ END TESTING VARIABLES ***********/
 
     public void functionsUI(){
-        /* remove from here */
 
-        dm.update(1,10);
-        dm.update(2,20);
-        dm.update(3,30);
-        dm.update(4,40);
-        dm.update(5,50);
-
-        dm.updateDB();
-
-        dm.updateDM();
-        /* to here */
         editTextFeel = (EditText)findViewById(R.id.editTextFeel);
         gamification_text = (TextView)findViewById(R.id.gamification_text);
         method = dm.chooseMethod();
@@ -74,6 +63,10 @@ public class exercise_startup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_startup);
         dm = new DecisionMatrix(this);
+        dm.updateDM();
+        gm = new Gamification(this);    //add "this"
+        gm.updateG();
+
         functionsUI();
     }
 }

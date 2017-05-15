@@ -174,6 +174,7 @@ public class DecisionMatrix {
         String weekNumSuccessString = Arrays.toString(weekNumSuccess);
         String scoresString = Arrays.toString(scores);
         String weightsString = Arrays.toString(weights);
+
         db.updateDataDM(
                 userIDString,
                 totalSRString,
@@ -197,7 +198,6 @@ public class DecisionMatrix {
         if (res.getCount()==0) {
             showMessage("Error", res.toString());
             return;
-
         }
 
         do {
@@ -272,12 +272,8 @@ public class DecisionMatrix {
 
         } while(res.moveToNext());
 
-        showMessage("Data", toString());
-
         /*
-        //String[] s = res.getString(1).split(",");
-        showMessage("test", res.getString(0) + "\n" + res.getString(1) + "\n" + res.getString(2)
-                + "\n" + res.getString(3));
+        showMessage("Data", toString());
         */
     }
 
