@@ -165,7 +165,7 @@ public class Gamification {
             method = Integer.parseInt(res.getString(4));
         } while(res.moveToNext());
 
-        showMessage("Data", level + "\n" + currentexp + "\n" + maxexp + "\n" + method);
+        //showMessage("Data", level + "\n" + currentexp + "\n" + maxexp + "\n" + method);
     }
 
     private void showMessage(String title, String Message) {
