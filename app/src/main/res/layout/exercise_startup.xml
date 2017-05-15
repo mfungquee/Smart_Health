@@ -8,49 +8,42 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:text="How do you feel today?"
-            android:id="@+id/textView6"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="24dp" />
+            android:layout_centerHorizontal="true" />
 
         <EditText
             android:id="@+id/editTextFeel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView6"
-            android:layout_alignStart="@+id/textView6"
-            android:layout_below="@+id/textView6"
-            android:layout_marginLeft="11dp"
-            android:layout_marginStart="11dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="54dp"
             android:ems="10"
             android:hint="On a scale from 1 to 10..."
-            android:inputType="number" />
+            android:inputType="number"
+            android:layout_below="@+id/textView6"
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/buttonContinue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Continue"
-            android:layout_above="@+id/buttonHelpMeDecide"
-            android:layout_alignRight="@+id/textView6"
-            android:layout_alignEnd="@+id/textView6" />
+            android:layout_below="@+id/gamification_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="59dp" />
 
         <Button
             android:id="@+id/buttonHelpMeDecide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/buttonContinue"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/buttonContinue"
-            android:layout_marginBottom="80dp"
-            android:text="Help Me Decide!" />
+            android:text="Help Me Decide!"
+            android:layout_below="@+id/buttonContinue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="39dp" />
 
         <TextView
             android:id="@+id/gamification_text"
@@ -61,8 +54,9 @@
             android:layout_alignRight="@+id/editTextFeel"
             android:layout_alignStart="@+id/editTextFeel"
             android:layout_below="@+id/editTextFeel"
-            android:layout_marginTop="61dp"
-            android:text="TextView" />
+            android:layout_marginTop="49dp"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     </RelativeLayout>
 </LinearLayout>

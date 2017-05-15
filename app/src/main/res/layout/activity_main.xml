@@ -14,20 +14,16 @@
         android:layout_height="wrap_content"
         android:text="Create New Account"
         android:id="@+id/buttonCreateNewAccount"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="91dp"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="83dp" />
+        android:layout_marginTop="74dp"
+        android:layout_below="@+id/textViewWelcome"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
         android:id="@+id/buttonLogin"
-        android:layout_below="@+id/buttonCreateNewAccount"
-        android:layout_marginTop="50dp"
+        android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/buttonCreateNewAccount"
         android:layout_alignStart="@+id/buttonCreateNewAccount"
         android:layout_alignRight="@+id/buttonCreateNewAccount"
@@ -38,10 +34,7 @@
         android:layout_height="wrap_content"
         android:text="Welcome to Smart Health!"
         android:id="@+id/textViewWelcome"
+        android:layout_marginTop="31dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="33dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="24dp" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

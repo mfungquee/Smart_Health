@@ -5,28 +5,24 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="Your Grade"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Rewards!"
-        android:id="@+id/textView8"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="108dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="23dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/rewards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView8"
-        android:layout_alignRight="@+id/textView8"
-        android:layout_below="@+id/grade"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="37dp"
         android:text="Rewards"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/grade"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/badge"
@@ -34,7 +30,7 @@
         android:layout_height="100dp"
         android:layout_below="@+id/rewards"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="43dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,21 +38,17 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Grade:"
         android:id="@+id/grade"
+        android:layout_marginTop="29dp"
         android:layout_below="@+id/textView8"
-        android:layout_alignLeft="@+id/rewards"
-        android:layout_alignStart="@+id/rewards"
-        android:layout_marginTop="48dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/buttonConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_toEndOf="@+id/rewards"
-        android:layout_toRightOf="@+id/rewards"
-        android:text="Confirm" />
+        android:text="Confirm"
+        android:layout_below="@+id/badge"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp" />
 
 </RelativeLayout>

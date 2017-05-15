@@ -8,45 +8,47 @@
         android:layout_height="match_parent">
 
         <Button
+            android:id="@+id/buttonExercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exercise"
-            android:id="@+id/buttonExercise"
-            android:layout_marginLeft="53dp"
-            android:layout_marginStart="53dp"
-            android:layout_above="@+id/buttonFriends"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="74dp" />
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="165dp"
+            android:text="Exercise" />
 
         <Button
+            android:id="@+id/buttonSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="49dp"
+            android:layout_marginRight="49dp"
             android:text="Settings"
-            android:id="@+id/buttonSettings"
-            android:layout_marginRight="41dp"
-            android:layout_marginEnd="41dp"
-            android:layout_alignTop="@+id/buttonExercise"
+            android:layout_alignBaseline="@+id/buttonExercise"
+            android:layout_alignBottom="@+id/buttonExercise"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
         <Button
+            android:id="@+id/buttonFriends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Friends"
-            android:id="@+id/buttonFriends"
-            android:layout_alignParentBottom="true"
             android:layout_alignLeft="@+id/buttonExercise"
             android:layout_alignStart="@+id/buttonExercise"
-            android:layout_marginBottom="140dp" />
+            android:layout_below="@+id/buttonExercise"
+            android:layout_marginTop="103dp"
+            android:text="Friends" />
 
         <Button
             android:id="@+id/buttonProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/buttonFriends"
             android:layout_alignBottom="@+id/buttonFriends"
-            android:layout_alignLeft="@+id/buttonSettings"
-            android:layout_alignStart="@+id/buttonSettings"
+            android:layout_alignEnd="@+id/buttonSettings"
+            android:layout_alignRight="@+id/buttonSettings"
             android:text="Progress" />
 
     </RelativeLayout>
