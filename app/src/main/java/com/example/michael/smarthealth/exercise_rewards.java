@@ -20,13 +20,17 @@ public class exercise_rewards extends AppCompatActivity {
 
     /************ TESTING VARIABLES ***********/
     // these variables are created before this activity: has to persist throughout app
-    int method = 1;     //this will have been determined by exercise_startup.
-    Gamification gm = new Gamification();
-    DecisionMatrix dm = new DecisionMatrix(this); //one for each exercise
+    int method ;     //this will have been determined by exercise_startup.
+    Gamification gm;
+    DecisionMatrix dm; //one for each exercise
     /************ END TESTING VARIABLES ***********/
 
 
     public void functionsUI(){
+
+        dm.updateDM();
+        gm.updateG();
+        method = gm.getMethod();
 
         grade = (TextView)findViewById(R.id.grade);
         rewards = (TextView)findViewById(R.id.rewards);
@@ -72,6 +76,8 @@ public class exercise_rewards extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: send workout information into database
+                dm.updateDB();
+                gm.updateDB();
                 Intent intent = new Intent(v.getContext(), main_screen.class); //intent is the link between pages
                 startActivity(intent); //when button is pressed, move from activity1 to activity2
 
@@ -87,6 +93,8 @@ public class exercise_rewards extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_rewards);
+        gm = new Gamification(this);
+        dm = new DecisionMatrix(this);
         functionsUI(); //functions for UI
     }//end onCreate
 

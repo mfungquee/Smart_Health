@@ -31,6 +31,7 @@ public class exercise_startup extends AppCompatActivity {
         editTextFeel = (EditText)findViewById(R.id.editTextFeel);
         gamification_text = (TextView)findViewById(R.id.gamification_text);
         method = dm.chooseMethod();
+        gm.setMethod(method);
         gamification_text.setText(gm.getString(method));
 
 

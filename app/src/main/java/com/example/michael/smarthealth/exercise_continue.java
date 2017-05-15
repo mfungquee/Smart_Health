@@ -32,10 +32,16 @@ public class exercise_continue extends AppCompatActivity {
     public int exerciseImage = 0;
 
     DecisionMatrix dm = new DecisionMatrix(this);
+    Gamification gm = new Gamification(this);
     int sumReps;
-    int method = 1; //this has to be brought in from exercise_startup.
+    int method; //this has to be brought in from exercise_startup.
 
     public void functionsUI(){
+
+        dm.updateDM();
+        gm.updateG();
+        method = gm.getMethod();
+
 
         //construct the exercise class to use functions
         final Exercise myExercise = new Exercise();
@@ -127,6 +133,9 @@ public class exercise_continue extends AppCompatActivity {
 
                 dm.update(method, sumReps);
 
+                dm.updateDB();
+                gm.updateDB();
+
                 Intent intent = new Intent(v.getContext(), exercise_rewards.class); //intent is the link between pages
                 startActivity(intent); //when button is pressed, move from activity1 to activity2
                 finish(); // take off stack so user can't return with back
@@ -167,6 +176,8 @@ public class exercise_continue extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_continue);
+        dm = new DecisionMatrix(this);
+        gm = new Gamification(this);
         functionsUI();
 
     }//end onCreate
