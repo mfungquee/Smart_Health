@@ -129,6 +129,38 @@ public class DecisionMatrix {
         return i;
     }
 
+
+    public void insertDB() {
+        //conversions to , separated strings
+        String userIDString = Integer.toString(userID);
+        String totalSRString = Arrays.toString(totalSR);
+        String numTimesString = Arrays.toString(numTimes);
+        String avgSRString = Arrays.toString(avgSR);
+        String weekSRString = "";
+        for (int i=0; i<5; i++)
+        {
+            weekSRString += "\n"+ Arrays.toString(weekSR[i]);
+        }
+        String weekNumSuccessString = Arrays.toString(weekNumSuccess);
+        String scoresString = Arrays.toString(scores);
+        String weightsString = Arrays.toString(weights);
+        db.insertDataDM(
+                userIDString,
+                totalSRString,
+                numTimesString,
+                avgSRString,
+                weekSRString,
+                weekNumSuccessString,
+                scoresString,
+                sum,
+                weightsString,
+                currentSR,
+                previousReps,
+                currentReps);
+    }
+
+
+
     public void updateDB() {
         //conversions to , separated strings
         String userIDString = Integer.toString(userID);
@@ -156,18 +188,15 @@ public class DecisionMatrix {
                 currentSR,
                 previousReps,
                 currentReps);
-
-        showMessage("db.updateDataDM() updated DB",
-                userIDString + "\n"
-                + totalSRString);
     }
+
 
     public void updateDM() {
 
         Cursor res = db.getAllDataDM();
         res.moveToFirst();
         if (res.getCount()==0) {
-            showMessage("Error", Integer.toString(res.getCount()));
+            showMessage("Error", res.toString());
             return;
 
         }
@@ -197,49 +226,7 @@ public class DecisionMatrix {
         builder.show();
     }
 
-	/*  this is to be called after a new entry has been added to db progress table
-	public void update() {
 
-		***********NEED DB STUFF HERE************
-		get the last entry of database for this userID and exerciseID
-		gameID = ??; //gamification id from database
-		successRate = ??; //success rate from database
-
-		//take off oldest success rate and add newest success rate
-		for (int i=0; i<6; i++)
-		{
-		 	weekSR[gameID-1][i] = weekSR[gameID-1][i+1];
-		}
-		weekSR[gameID-1][6] = successRate;
-
-		//count # of successes past week and put into weekNumSuccess
-		weekNumSuccess[gameID-1] = 0;
-		for (int i=0; i<7; i++)
-		{
-		 	if(weekSR[gameID-1][i] == 1)
-			{
-				weekNumSuccess[gameID-1]++;
-			}
-		}
-
-		//update avg success rate
-		totalSR[gameID-1] += successRate;		//add to success rate running total
-		numTimes[gameID-1]++; 					//increment # of times game method used
-		avgSR[gameID-1] = totalSR[gameID-1] / numTimes[gameID-1]; 		//total success / num times used
-
-		//calculate new scores for this game method
-		scores[gameID-1] = 0.4*weekNumSuccess[gameID-1] + 0.6*avgSR[gameID-1];
-
-		//calculate new weights
-		calcWeights();
-
-	}
-	 */
-
-
-    /********************************************
-     *********FOR TESTING PURPOSES**********
-     ********************************************/
     public void update(int gameID, int reps) {
         previousReps = currentReps;
         currentReps = reps;
@@ -272,9 +259,7 @@ public class DecisionMatrix {
         //calculate new weights
         calcWeights();
     }
-    /********************************************
-     *********END TESTING METHOD**********
-     ********************************************/
+
 
 
 

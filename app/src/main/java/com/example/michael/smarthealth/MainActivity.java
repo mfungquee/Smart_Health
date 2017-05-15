@@ -8,6 +8,9 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    DatabaseHelper db;
+    DecisionMatrix dm;
+
     //xml ids of buttons
     public Button buttonCreateNewAccount;
     public Button buttonLogin;
@@ -15,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     //functions for UI interactions
     public void functionsUI(){
 
-        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        dm.insertDB();
+
         buttonCreateNewAccount = (Button)findViewById(R.id.buttonCreateNewAccount); //reference to button from xml
 
         buttonCreateNewAccount.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = DatabaseHelper.getInstance(this);
+        dm = new DecisionMatrix(this);
         functionsUI(); //UI functionality
     }
 
