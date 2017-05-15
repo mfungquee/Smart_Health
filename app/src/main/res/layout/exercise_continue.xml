@@ -19,7 +19,7 @@
                     android:id="@+id/textViewExercise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Excercise"
+                    android:text="Exercise"
                     android:textSize="30sp" />
                 <ListView
                     android:id="@+id/listViewWorkout"
